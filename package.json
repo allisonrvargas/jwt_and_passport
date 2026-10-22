@@ -1,5 +1,19 @@
 {
+  "name": "jwt_and_passport",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "api/src/server.js",
+  "scripts": {
+    "start": "node api/src/server.js",
+    "dev": "node --watch api/src/server.js"
+  },
   "dependencies": {
-    "express-validator": "^7.3.2"
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0"
   }
 }

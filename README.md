@@ -1,5 +1,8 @@
 # API Gremio de Cazadores (JWT & Passport)
 
+[![CI](https://github.com/allisonrvargas/jwt_and_passport/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/allisonrvargas/jwt_and_passport/actions/workflows/ci.yml)
+[![Licencia: MIT](https://img.shields.io/badge/licencia-MIT-green.svg)](LICENSE)
+
 Una API RESTful profesional, modular y segura construida con **Node.js**, **Express**, **Passport.js** y **JWT** (JSON Web Tokens) estructurada bajo una arquitectura limpia por capas.
 
 ---

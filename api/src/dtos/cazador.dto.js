@@ -8,7 +8,7 @@ export class CredencialesDTO {
 
 export class PerfilCazadorDTO {
   constructor(cazador = {}) {
-    this.id = String(cazador.id ?? cazador._id ?? "");
+    this.id = String(cazador.id ?? cazador._id ?? cazador.sub ?? "");
     this.username = cazador.username;
     this.name = cazador.name;
     this.rango = cazador.rango ?? "B";

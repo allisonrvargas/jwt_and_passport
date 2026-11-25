@@ -69,3 +69,48 @@ api/
     └── validators/
         └── auth.validator.js  # Validaciones con express-validator
 ```
+---
+
+## Ejemplos de uso (curl)
+
+Con el servidor en `http://localhost:3000`:
+
+**1. Iniciar sesión como administrador y obtener el token**
+
+```bash
+curl -X POST http://localhost:3000/api/v1/users/authenticate \
+  -H "Content-Type: application/json" \
+  -d '{"username":"jinwoo","password":"Password123!"}'
+```
+
+Respuesta (`200`):
+
+```json
+{ "token": "<JWT>", "tipo": "Bearer", "expiraEn": "2h", "cazador": { } }
+```
+
+**2. Listar cazadores (requiere token)**
+
+```bash
+curl http://localhost:3000/api/v1/user/list \
+  -H "Authorization: Bearer <JWT>"
+```
+
+**3. Registrar una recompensa en la bóveda (solo administradores)**
+
+```bash
+curl -X POST http://localhost:3000/api/v1/boveda/recompensa \
+  -H "Authorization: Bearer <JWT>" \
+  -H "Content-Type: application/json" \
+  -d '{"mision":"Mazmorra de nivel S","cristales":500}'
+```
+
+Respuesta: `201` con la recompensa creada.
+
+**Errores comunes**
+
+| Caso | Respuesta |
+| :--- | :--- |
+| Body inválido (username corto, cristales fuera de rango) | `400` con la lista de errores |
+| Sin token o token inválido | `401` |
+| Usuario regular (`cha`) en `/boveda/recompensa` | `403` |

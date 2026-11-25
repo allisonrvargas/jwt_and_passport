@@ -1,5 +1,7 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
+import bcrypt from "bcryptjs";
+import { HASH_FALSO } from "../models/cazador.model.js";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import { cazadorService, JWT_SECRET } from "../services/cazador.service.js";
 import { PerfilCazadorDTO } from "../dtos/cazador.dto.js";
@@ -13,7 +15,9 @@ export function configurarPassport() {
     async (username, password, done) => {
       try {
         const cazador = await cazadorService.buscarPorUsername(username);
-        if (!cazador || cazador.password !== password) {
+        // Siempre se compara con un hash (real o falso) para que el tiempo no delate si el usuario existe
+        const coincide = await bcrypt.compare(password, cazador?.passwordHash ?? HASH_FALSO);
+        if (!cazador || !coincide) {
           return done(null, false, { message: "Credenciales inválidas: usuario o contraseña incorrectos" });
         }
         return done(null, cazador);
